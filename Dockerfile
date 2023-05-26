@@ -2,9 +2,13 @@ FROM node:18.16.0
 
 # RUN npm install
 
-COPY dist/index.html /usr/share/nginx/html/
-COPY dist/js /usr/share/nginx/html/js/
-COPY dist/css /usr/share/nginx/html/css/
-COPY dist/favicon.ico /usr/share/nginx/html/
+WORKDIR /Jenkins_Deploy
+COPY package*.json ./
+RUN npm install
+COPY dist ./dist
+RUN npm run build
 
+FROM nginx:1.21-alpine
+COPY --from=build-stage /app/dist /usr/share/nginx/html/dist
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
