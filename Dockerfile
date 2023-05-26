@@ -1,6 +1,6 @@
 FROM node:18.16.0
 
-RUN npm install
+# RUN npm install
 
 COPY dist/index.html /usr/share/nginx/html/
 COPY dist/js /usr/share/nginx/html/js/
