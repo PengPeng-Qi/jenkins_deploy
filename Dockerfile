@@ -19,7 +19,7 @@ RUN npm run build
 FROM nginx:latest
 
 # 复制构建生成的静态文件到 NGINX 的默认 HTML 目录
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=0 /app/dist /usr/share/nginx/html
 
 # 暴露端口
 EXPOSE 80
